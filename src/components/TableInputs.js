@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addData } from "../Redux/actions/tableAction";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addData, updateData } from "../Redux/actions/tableAction";
 
 const TableInputs = () => {
   const [inputValue, setInputValue] = useState({
@@ -9,6 +9,14 @@ const TableInputs = () => {
     price: "",
     company: "",
   });
+
+  const { selectedData, editable } = useSelector(state => state.tableReducer);
+  console.log(selectedData);
+
+  /**........................Use Effect............................. */
+  useEffect(() => {
+    if (selectedData !== null) setInputValue(selectedData);
+  }, [selectedData]);
 
   const dispatch = useDispatch();
 
@@ -19,16 +27,26 @@ const TableInputs = () => {
     }));
 
   const handleSubmit = e => {
-    const { title, info, price, company } = inputValue;
+    if (selectedData !== null) {
+      const update = {
+        id: selectedData,
 
-    // Simple Validation Check...
-    if (title !== "" && info !== "" && price !== "" && company !== "") {
-      const newData = {
-        id: Math.random(),
         ...inputValue,
       };
 
-      dispatch(addData(newData));
+      dispatch(updateData(update));
+    } else {
+      const { title, info, price, company } = inputValue;
+
+      // Simple Validation Check...
+      if (title !== "" && info !== "" && price !== "" && company !== "") {
+        const newData = {
+          id: Math.random(),
+          ...inputValue,
+        };
+
+        dispatch(addData(newData));
+      }
     }
 
     setInputValue({ title: "", info: "", price: "", company: "" }); // Reset the input fields back to default...
@@ -78,8 +96,11 @@ const TableInputs = () => {
       </td>
 
       <td>
-        <button type="button" className="btn add" onClick={handleSubmit}>
-          Add New Row
+        <button
+          type="button"
+          className={`btn add ${editable && "save"}`}
+          onClick={handleSubmit}>
+          {editable ? "Save" : " Add New Row"}
         </button>
       </td>
     </tr>

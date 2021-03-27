@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteData } from "../Redux/actions/tableAction";
+import { deleteData, selectedData } from "../Redux/actions/tableAction";
 
 const TableData = ({ data }) => {
   const dispatch = useDispatch();
@@ -8,6 +8,11 @@ const TableData = ({ data }) => {
   const handleDelete = id => {
     dispatch(deleteData(id));
   };
+
+  const handleEdit = data => {
+    dispatch(selectedData(data));
+  };
+
   return (
     <tr>
       <td>{data.title}</td>
@@ -16,7 +21,9 @@ const TableData = ({ data }) => {
       <td>{data.company}</td>
 
       <td>
-        <button className="btn primary">Edit</button>
+        <button className="btn primary" onClick={() => handleEdit(data)}>
+          Edit
+        </button>
 
         <button className="btn danger" onClick={() => handleDelete(data.id)}>
           Delete
