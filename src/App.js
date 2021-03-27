@@ -1,6 +1,7 @@
 import React from "react";
 import "./Index.css";
 import TableInputs from "./components/TableInputs";
+import TableRow from "./components/TableRow";
 
 const App = () => {
   return (
@@ -20,6 +21,8 @@ const App = () => {
           </thead>
           <tbody>
             <TableInputs />
+
+            <TableRow />
           </tbody>
         </table>
       </div>

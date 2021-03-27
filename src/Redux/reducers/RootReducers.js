@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import tableReducer from "./TableReducer";
 
-const rooterReducers = combineReducers({ tableData: tableReducer });
+const rooterReducers = combineReducers({ tableReducer });
 
 export default rooterReducers;
