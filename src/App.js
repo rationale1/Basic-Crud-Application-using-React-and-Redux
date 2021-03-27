@@ -1,10 +1,28 @@
 import React from "react";
 import "./Index.css";
+import TableInputs from "./components/TableInputs";
 
 const App = () => {
   return (
-    <div>
-      <h1>Table</h1>
+    <div className="container">
+      <h2>React Crud Operations</h2>
+
+      <div className="table">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Information</th>
+              <th>Price</th>
+              <th>Company</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <TableInputs />
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
