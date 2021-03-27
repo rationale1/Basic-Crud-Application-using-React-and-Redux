@@ -16,8 +16,6 @@ const initState = {
       price: 10,
       company: "Toyota",
       info: "One of the best car",
-      inCart: false,
-      count: 1,
     },
     {
       id: 2,
@@ -25,8 +23,6 @@ const initState = {
       price: 20,
       company: "Honda",
       info: "Good Bike",
-      inCart: false,
-      count: 1,
     },
   ],
 
